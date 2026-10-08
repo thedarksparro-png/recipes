@@ -61,6 +61,9 @@
 
   function formatServings(value) {
     if (value == null || value === "") return "";
+    if (typeof value === "string" && /^\s*\d+\s*[-–]\s*\d+\s*$/.test(value)) {
+      return value.replace(/\s*[-–]\s*/, "–").trim() + " servings";
+    }
     var n = Number(value);
     if (!Number.isFinite(n) || n <= 0) return "";
     var shown = Number.isInteger(n) ? String(n) : String(Math.round(n * 10) / 10);

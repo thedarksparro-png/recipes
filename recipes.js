@@ -77,5 +77,44 @@ window.RECIPES = [
     ],
     "steps": [],
     "notes": "From a Primo Recipes card. The card lists ingredients only, with no steps."
+  },
+  {
+    "id": "easy-beef-chili",
+    "title": "Easy Beef Chili",
+    "category": "Soups & Stews",
+    "tags": [
+      "beef",
+      "beans"
+    ],
+    "timeMinutes": null,
+    "servings": "6-8",
+    "image": "",
+    "ingredients": [
+      "1 lb ground beef (80/20 or 85/15)",
+      "1 medium onion, diced",
+      "3 cloves garlic, minced",
+      "1 bell pepper, diced (optional)",
+      "2 tbsp chili powder",
+      "1 tsp cumin",
+      "1 tsp smoked paprika",
+      "1/2 tsp oregano",
+      "1/4 to 1/2 tsp cayenne pepper (optional, for heat)",
+      "1 (28 oz) can crushed tomatoes",
+      "1 (15 oz) can kidney beans, drained and rinsed",
+      "1 (15 oz) can black beans or pinto beans, drained and rinsed",
+      "1 cup beef broth or water",
+      "1 tbsp tomato paste (optional, for richer flavor)",
+      "Salt and pepper to taste"
+    ],
+    "steps": [
+      "In a large pot or Dutch oven, brown the ground beef over medium-high heat. Drain excess fat if needed.",
+      "Add onion and bell pepper. Cook 5 minutes until softened.",
+      "Stir in garlic and cook 30 seconds.",
+      "Add chili powder, cumin, paprika, oregano, and cayenne. Cook 1 minute to bloom the spices.",
+      "Stir in crushed tomatoes, beans, broth, and tomato paste.",
+      "Bring to a simmer, then reduce heat and cook uncovered for 30 to 45 minutes, stirring occasionally.",
+      "Taste and adjust with salt, pepper, and extra chili powder if desired."
+    ],
+    "notes": "Optional upgrades: add 1 chipotle pepper in adobo sauce for smoky heat; stir in 1 square of dark chocolate near the end for depth; use a splash of beer instead of some of the broth; mix in corn during the last 10 minutes. Toppings: shredded cheddar, sour cream, green onions, diced avocado, cilantro, crushed tortilla chips. Chili is often even better the next day after the flavors have had time to meld."
   }
 ];
