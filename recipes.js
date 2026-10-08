@@ -116,5 +116,35 @@ window.RECIPES = [
       "Taste and adjust with salt, pepper, and extra chili powder if desired."
     ],
     "notes": "Optional upgrades: add 1 chipotle pepper in adobo sauce for smoky heat; stir in 1 square of dark chocolate near the end for depth; use a splash of beer instead of some of the broth; mix in corn during the last 10 minutes. Toppings: shredded cheddar, sour cream, green onions, diced avocado, cilantro, crushed tortilla chips. Chili is often even better the next day after the flavors have had time to meld."
+  },
+  {
+    "id": "classic-french-toast",
+    "title": "Classic French Toast",
+    "category": "Breakfast",
+    "tags": [
+      "quick",
+      "sweet"
+    ],
+    "timeMinutes": null,
+    "servings": "2-3",
+    "image": "",
+    "ingredients": [
+      "4 slices of thick bread (brioche, challah, Texas toast, or regular sandwich bread)",
+      "2 large eggs",
+      "1/2 cup (120 ml) milk",
+      "1 teaspoon vanilla extract",
+      "1/2 teaspoon ground cinnamon (optional)",
+      "1 tablespoon sugar (optional)",
+      "Pinch of salt",
+      "1 tablespoon butter for cooking"
+    ],
+    "steps": [
+      "In a shallow bowl, whisk together the eggs, milk, vanilla, cinnamon, sugar, and salt.",
+      "Dip each slice of bread into the mixture, coating both sides. Let it soak for a few seconds without becoming too soggy.",
+      "Heat a skillet or griddle over medium heat and melt the butter.",
+      "Add the bread slices and cook for 2 to 4 minutes per side, until golden brown.",
+      "Serve warm with your favorite toppings."
+    ],
+    "notes": "Topping ideas: maple syrup, powdered sugar, fresh berries or sliced bananas, whipped cream, peanut butter or Nutella, toasted nuts. For extra-rich French toast, use brioche bread and substitute half of the milk with heavy cream."
   }
 ];
