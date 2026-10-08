@@ -55,5 +55,27 @@ window.RECIPES = [
       "Finish: Brush the top with a little melted butter while hot for a soft crust. Cool completely before slicing."
     ],
     "notes": "Makes 1 large loaf."
+  },
+  {
+    "id": "smoky-mustard-pickles",
+    "title": "Smoky Mustard Pickles",
+    "category": "Pickles",
+    "tags": [
+      "pickles"
+    ],
+    "timeMinutes": null,
+    "servings": null,
+    "image": "",
+    "ingredients": [
+      "1 lb cucumbers",
+      "1 cup white vinegar",
+      "1 cup water",
+      "2 tbsp sugar",
+      "1 tbsp mustard seeds",
+      "1 tsp smoked paprika",
+      "2 tsp fine salt"
+    ],
+    "steps": [],
+    "notes": "From a Primo Recipes card. The card lists ingredients only, with no steps."
   }
 ];
