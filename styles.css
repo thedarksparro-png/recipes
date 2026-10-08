@@ -85,7 +85,7 @@ code {
 .mast h1 {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(3.4rem, 8vw, 5.5rem);
+  font-size: clamp(2.7rem, 7.5vw, 5.2rem);
   line-height: 0.88;
   letter-spacing: -0.035em;
   margin: 0.2rem 0 0;

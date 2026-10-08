@@ -230,7 +230,7 @@
     }
 
     if (!recipe) {
-      document.title = "Recipes";
+      document.title = "The Dark Sparrow · Recipes";
       app.innerHTML =
         '<article class="detail">' +
         '<a class="back" href="#/">← All recipes</a>' +
@@ -244,7 +244,7 @@
     }
 
     var title = str(recipe.title) || "Untitled";
-    document.title = title + " · Recipes";
+    document.title = title + " · The Dark Sparrow";
     var category = str(recipe.category);
     var meta = [formatTime(recipe.timeMinutes), formatServings(recipe.servings)].filter(Boolean);
     var tags = stringList(recipe.tags);
@@ -316,7 +316,7 @@
     document.body.classList.toggle("is-detail", next.name === "detail");
     if (next.name === "detail") renderDetail(next.id);
     else {
-      document.title = "Recipes";
+      document.title = "The Dark Sparrow · Recipes";
       renderList();
     }
     window.scrollTo(0, 0);
