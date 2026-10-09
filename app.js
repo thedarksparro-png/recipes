@@ -112,6 +112,12 @@
     '<path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M24 40c2-10 6-16 14-22-8 1-14 4-18 10 0-8-2-14-8-20 1 10 4 18 12 32z"></path>' +
     "</svg>";
 
+  function tone(category) {
+    var h = 0;
+    for (var i = 0; i < category.length; i++) h = (h * 31 + category.charCodeAt(i)) >>> 0;
+    return " tone-" + (h % 4);
+  }
+
   function card(recipe) {
     var id = recipeId(recipe);
     var title = str(recipe.title) || "Untitled";
@@ -137,8 +143,9 @@
           "</span>"
         : "") +
       "</span>";
-    if (!id) return '<article class="card">' + inner + "</article>";
-    return '<a class="card" href="#/recipe/' + encodeURIComponent(id) + '">' + inner + "</a>";
+    var cls = "card" + tone(category);
+    if (!id) return '<article class="' + cls + '">' + inner + "</article>";
+    return '<a class="' + cls + '" href="#/recipe/' + encodeURIComponent(id) + '">' + inner + "</a>";
   }
 
   function paintResults() {
@@ -230,7 +237,7 @@
     }
 
     if (!recipe) {
-      document.title = "The Dark Sparrow · Recipes";
+      document.title = "The Dark Sparrow Eats";
       app.innerHTML =
         '<article class="detail">' +
         '<a class="back" href="#/">← All recipes</a>' +
@@ -244,7 +251,7 @@
     }
 
     var title = str(recipe.title) || "Untitled";
-    document.title = title + " · The Dark Sparrow";
+    document.title = title + " · The Dark Sparrow Eats";
     var category = str(recipe.category);
     var meta = [formatTime(recipe.timeMinutes), formatServings(recipe.servings)].filter(Boolean);
     var tags = stringList(recipe.tags);
@@ -254,7 +261,7 @@
     var image = safeSrc(recipe.image);
 
     app.innerHTML =
-      '<article class="detail">' +
+      '<article class="detail' + tone(category) + '">' +
       '<a class="back" href="#/">← All recipes</a>' +
       (category ? '<p class="kicker">' + esc(category) + "</p>" : "") +
       '<h2 class="recipe-title">' +
@@ -316,7 +323,7 @@
     document.body.classList.toggle("is-detail", next.name === "detail");
     if (next.name === "detail") renderDetail(next.id);
     else {
-      document.title = "The Dark Sparrow · Recipes";
+      document.title = "The Dark Sparrow Eats";
       renderList();
     }
     window.scrollTo(0, 0);

@@ -1,4 +1,4 @@
-# The Dark Sparrow · Recipes
+# The Dark Sparrow Eats
 
 A static site for recipes you type in yourself. No build step and no framework.
 
