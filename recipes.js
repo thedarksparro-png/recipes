@@ -342,5 +342,38 @@ window.RECIPES = [
       "Serve with jam and cream, berries, or fruit."
     ],
     "notes": "Makes about 8 to 10 thin pancakes, depending on the size of your pan. Cup measurements are approximate conversions from the Swedish deciliters. Translated from ICA.se, \"Pannkakor – grundsmet\" (originally from Buffé no. 11, 1997)."
+  },
+  {
+    "id": "crockpot-potato-soup",
+    "title": "Crockpot Potato Soup",
+    "category": "Soups & Stews",
+    "tags": [
+      "slow cooker",
+      "potato",
+      "comfort food"
+    ],
+    "timeMinutes": 250,
+    "servings": 6,
+    "image": "",
+    "ingredients": [
+      "6 large potatoes, peeled and diced",
+      "1 large onion, diced",
+      "3 garlic cloves, minced",
+      "4 cups chicken broth",
+      "8 oz cream cheese, softened",
+      "2 cups shredded cheddar cheese",
+      "6 slices bacon, cooked and crumbled",
+      "4 green onions, sliced (for garnish)",
+      "Salt and pepper to taste"
+    ],
+    "steps": [
+      "Chop the potatoes, onion and garlic.",
+      "Add them to the crockpot with the broth, salt and pepper.",
+      "Cook on low for 7–8 hours or on high for 4–5 hours.",
+      "Blend half the soup with an immersion blender.",
+      "Stir in the cream cheese until melted, then taste and adjust the seasoning.",
+      "Serve topped with cheddar, bacon and green onions."
+    ],
+    "notes": "Total time shown is for cooking on high; allow 7–8 hours on low. Adapted from Be Centsational (https://becentsational.com/crockpot-potato-soup/)."
   }
 ];
