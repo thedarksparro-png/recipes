@@ -133,6 +133,7 @@
       esc(title) +
       "</span>" +
       (meta.length ? '<span class="meta">' + esc(meta.join(" · ")) + "</span>" : "") +
+      (id ? '<span class="card-rating" data-rating-for="' + esc(id) + '" hidden></span>' : "") +
       (tags.length
         ? '<span class="tags">' +
           tags
@@ -173,6 +174,7 @@
       return;
     }
     results.innerHTML = '<div class="grid">' + list.map(card).join("") + "</div>";
+    if (window.Reviews) window.Reviews.paintCards(results);
   }
 
   function renderList() {
@@ -302,7 +304,19 @@
         : '<p class="muted">No steps listed.</p>') +
       "</section></div>" +
       (notes ? '<section class="notes"><h3>Notes</h3><p>' + esc(notes) + "</p></section>" : "") +
+      '<section class="reviews" id="reviews"></section>' +
       "</article>";
+
+    var reviewsSection = document.getElementById("reviews");
+    if (window.Reviews) {
+      try {
+        window.Reviews.mountDetail(reviewsSection, recipeId(recipe));
+      } catch (err) {
+        reviewsSection.remove();
+      }
+    } else if (reviewsSection) {
+      reviewsSection.remove();
+    }
   }
 
   function parseRoute() {
