@@ -118,7 +118,7 @@
     return " tone-" + (h % 4);
   }
 
-  function card(recipe) {
+  function card(recipe, badge) {
     var id = recipeId(recipe);
     var title = str(recipe.title) || "Untitled";
     var category = str(recipe.category);
@@ -128,6 +128,7 @@
     var inner =
       (image ? '<span class="card-photo"><img src="' + esc(image) + '" alt=""></span>' : "") +
       '<span class="card-body">' +
+      (badge ? '<span class="top-badge"><span aria-hidden="true">★</span> Top rated</span>' : "") +
       (category ? '<span class="kicker">' + esc(category) + "</span>" : "") +
       '<span class="card-title">' +
       esc(title) +
@@ -149,6 +150,136 @@
     return '<a class="' + cls + '" href="#/recipe/' + encodeURIComponent(id) + '">' + inner + "</a>";
   }
 
+  var statsMap = null;
+  var paintToken = 0;
+
+  function isTopView() {
+    return !state.query.trim() && !state.category;
+  }
+
+  function titleOf(recipe) {
+    return str(recipe.title) || "Untitled";
+  }
+
+  function byTitle(a, b) {
+    return titleOf(a).localeCompare(titleOf(b));
+  }
+
+  function statFor(recipe) {
+    var row = statsMap && statsMap[recipeId(recipe)];
+    var count = row ? Number(row.review_count) || 0 : 0;
+    return { avg: count ? Number(row.avg_rating) || 0 : 0, count: count };
+  }
+
+  function topPick(list) {
+    var rated = list.filter(function (recipe) {
+      return statFor(recipe).count > 0;
+    });
+    if (rated.length) {
+      rated.sort(function (a, b) {
+        var sa = statFor(a);
+        var sb = statFor(b);
+        if (sb.avg !== sa.avg) return sb.avg - sa.avg;
+        if (sb.count !== sa.count) return sb.count - sa.count;
+        return byTitle(a, b);
+      });
+      return { recipe: rated[0], rated: true };
+    }
+    return { recipe: list.slice().sort(byTitle)[0], rated: false };
+  }
+
+  function topHtml() {
+    var tiles = categories().map(function (category) {
+      var list = recipes.filter(function (recipe) {
+        return str(recipe.category) === category;
+      });
+      var pick = topPick(list);
+      return (
+        '<section class="cat-tile' + tone(category) + '">' +
+        '<div class="cat-head">' +
+        '<h2 class="cat-name">' + esc(category) + "</h2>" +
+        '<button type="button" class="see-all" data-category="' + esc(category) + '">' +
+        "See all " + list.length + ' <span aria-hidden="true">→</span>' +
+        '<span class="sr-only"> ' + esc(category) + " recipes</span></button>" +
+        "</div>" +
+        card(pick.recipe, pick.rated) +
+        "</section>"
+      );
+    });
+    var uncategorized = recipes.filter(function (recipe) {
+      return !str(recipe.category);
+    });
+    if (uncategorized.length) {
+      var pick = topPick(uncategorized);
+      tiles.push(
+        '<section class="cat-tile">' +
+        '<div class="cat-head"><h2 class="cat-name">Other</h2></div>' +
+        card(pick.recipe, pick.rated) +
+        "</section>"
+      );
+    }
+    return (
+      '<div class="view-bar">' +
+      '<p class="view-title">Top rated in each category</p>' +
+      '<p class="view-note">' + recipes.length + (recipes.length === 1 ? " recipe" : " recipes") +
+      " in all. Search, pick a category, or tap See all to browse everything.</p>" +
+      "</div>" +
+      '<div class="cat-grid">' + tiles.join("") + "</div>"
+    );
+  }
+
+  function listBar(count) {
+    var what = state.category ? esc(state.category) : "all categories";
+    return (
+      '<div class="view-bar">' +
+      '<p class="view-title">' + count + (count === 1 ? " recipe" : " recipes") +
+      (state.query.trim() ? " matching “" + esc(state.query.trim()) + "”" : "") +
+      " in " + what + "</p>" +
+      '<button type="button" class="back-top" data-top="1"><span aria-hidden="true">←</span> Top picks</button>' +
+      "</div>"
+    );
+  }
+
+  function showTop() {
+    state.query = "";
+    state.category = "";
+    syncInputs();
+    paintResults();
+  }
+
+  function showCategory(category) {
+    state.query = "";
+    state.category = category;
+    syncInputs();
+    paintResults();
+    var filters = document.getElementById("filters");
+    if (filters && filters.scrollIntoView) filters.scrollIntoView({ block: "start" });
+  }
+
+  function syncInputs() {
+    var search = document.getElementById("search");
+    var select = document.getElementById("category");
+    if (search) search.value = state.query;
+    if (select) select.value = state.category;
+  }
+
+  function paintTop(results) {
+    results.innerHTML = topHtml();
+    if (window.Reviews) window.Reviews.paintCards(results);
+    if (statsMap || !window.Reviews || !window.Reviews.getStats) return;
+    var token = paintToken;
+    window.Reviews.getStats()
+      .then(function (map) {
+        statsMap = map || null;
+        if (token !== paintToken || !results.isConnected || !isTopView()) return;
+        results.innerHTML = topHtml();
+        window.Reviews.paintCards(results);
+      })
+      .catch(function () {
+        /* No ratings: keep the first recipe by title in each category. */
+      });
+  }
+
   function paintResults() {
     var results = document.getElementById("results");
     if (!results) return;
@@ -162,9 +293,15 @@
         "</div>";
       return;
     }
+    paintToken += 1;
+    if (isTopView()) {
+      paintTop(results);
+      return;
+    }
     var list = filtered();
     if (!list.length) {
       results.innerHTML =
+        listBar(0) +
         '<div class="empty">' +
         leaf +
         '<p class="empty-kicker">No matches</p>' +
@@ -173,7 +310,15 @@
         "</div>";
       return;
     }
-    results.innerHTML = '<div class="grid">' + list.map(card).join("") + "</div>";
+    results.innerHTML =
+      listBar(list.length) +
+      '<div class="grid">' +
+      list
+        .map(function (recipe) {
+          return card(recipe, false);
+        })
+        .join("") +
+      "</div>";
     if (window.Reviews) window.Reviews.paintCards(results);
   }
 
@@ -209,7 +354,7 @@
       options +
       "</select></label>" +
       "</form>" +
-      '<div id="results"></div>' +
+      '<div id="results" aria-live="polite"></div>' +
       "</section>";
 
     var form = document.getElementById("filters");
@@ -225,6 +370,16 @@
     category.addEventListener("change", function () {
       state.category = category.value;
       paintResults();
+    });
+    document.getElementById("results").addEventListener("click", function (event) {
+      var target = event.target.closest ? event.target.closest("button") : null;
+      if (!target) return;
+      if (target.hasAttribute("data-top")) {
+        showTop();
+        search.focus();
+      } else if (target.hasAttribute("data-category")) {
+        showCategory(target.getAttribute("data-category"));
+      }
     });
     paintResults();
   }

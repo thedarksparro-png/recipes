@@ -10,6 +10,7 @@
   var key = typeof cfg.key === "string" ? cfg.key : "";
   var enabled = Boolean(base && key && window.fetch);
   var STORE = "dse-rated";
+  var CODE_STORE = "dse-review-code";
   var statsCache = null;
   var statsAt = 0;
   var uid = 0;
@@ -72,6 +73,13 @@
     if (err && err.kind === "network") {
       return "We couldn't reach the review service. Check your connection and try again.";
     }
+    if (msg === "wrong_code") return "That code isn't right. Check with the cook and try again.";
+    if (msg === "too_many_attempts") {
+      return "Too many wrong codes were tried just now, so reviews are paused for a few minutes. Please try again later.";
+    }
+    if (msg === "invalid_input") {
+      return "Something in that review didn't fit. Names can be up to 40 characters and comments up to 1,000.";
+    }
     if (msg === "no_links") return "Links aren't allowed in reviews. Remove the link and try again.";
     if (msg === "rate_limited") return "Lots of reviews just came in. Give it a minute and try again.";
     if (err && err.code === "23514") {
@@ -96,6 +104,30 @@
       localStorage.setItem(STORE, JSON.stringify(data));
     } catch (e) {
       /* Private mode or storage full: not important. */
+    }
+  }
+
+  function readCode() {
+    try {
+      return localStorage.getItem(CODE_STORE) || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function saveCode(code) {
+    try {
+      localStorage.setItem(CODE_STORE, code);
+    } catch (e) {
+      /* Not important. */
+    }
+  }
+
+  function clearCode() {
+    try {
+      localStorage.removeItem(CODE_STORE);
+    } catch (e) {
+      /* Not important. */
     }
   }
 
@@ -149,6 +181,11 @@
       statsAt = Date.now();
       return map;
     });
+  }
+
+  function getStats() {
+    if (!enabled) return Promise.reject(new Error("disabled"));
+    return fetchStats();
   }
 
   function paintCards(root) {
@@ -230,6 +267,9 @@
       '<label class="field field-wide"><span class="label">Comment <span class="optional">(optional)</span></span>' +
       '<textarea name="comment" rows="4" maxlength="1000" placeholder="How did it turn out? Any tweaks?"></textarea>' +
       '<span class="char-count" aria-hidden="true">0 / 1000</span></label>' +
+      '<label class="field field-code"><span class="label">Review code</span>' +
+      '<input type="text" name="code" inputmode="numeric" autocomplete="off" required maxlength="12" spellcheck="false" aria-describedby="' + prefix + '-codehelp">' +
+      '<span class="field-help" id="' + prefix + '-codehelp">Ask the cook for the code.</span></label>' +
       '<div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
       "</div>" +
       '<div class="form-foot">' +
@@ -249,6 +289,8 @@
     var textarea = form.elements.comment;
     var counter = section.querySelector(".char-count");
     var reviews = [];
+    var codeInput = form.elements.code;
+    codeInput.value = readCode();
 
     if (!enabled) {
       summary.innerHTML = '<span class="muted">Ratings are unavailable right now.</span>';
@@ -334,6 +376,7 @@
       var rating = selected();
       var name = form.elements.name.value.trim();
       var comment = textarea.value.trim();
+      var code = codeInput.value.trim();
 
       if (form.elements.website.value) {
         /* Honeypot filled in: almost certainly a bot. Pretend all is well. */
@@ -351,25 +394,36 @@
         setMsg("Links aren't allowed in reviews. Remove the link and try again.", "error");
         return;
       }
+      if (!code) {
+        setMsg("Enter the review code first. Ask the cook for it.", "error");
+        codeInput.focus();
+        return;
+      }
 
       btn.disabled = true;
       btn.textContent = "Posting…";
       setMsg("", "");
 
-      request("/reviews?select=id,name,rating,comment,created_at", {
+      request("/rpc/submit_review", {
         method: "POST",
-        prefer: "return=representation",
         body: {
-          recipe_id: recipeId,
-          rating: rating,
-          name: name || null,
-          comment: comment || null
+          p_recipe_id: recipeId,
+          p_rating: rating,
+          p_name: name || null,
+          p_comment: comment || null,
+          p_code: code
         }
       })
-        .then(function (rows) {
-          var row = Array.isArray(rows) && rows[0]
-            ? rows[0]
+        .then(function (data) {
+          if (!data || data.ok !== true) {
+            var err = new Error((data && data.error) || "unknown");
+            err.kind = "server";
+            throw err;
+          }
+          var row = data.review && typeof data.review === "object"
+            ? data.review
             : { name: name, rating: rating, comment: comment, created_at: new Date().toISOString() };
+          saveCode(code);
           remember(recipeId, rating);
           statsCache = null;
           if (!section.isConnected) return;
@@ -377,6 +431,7 @@
           paintSummary();
           paintList();
           form.reset();
+          codeInput.value = code;
           counter.textContent = "0 / 1000";
           light(0);
           var you = section.querySelector(".you-rated");
@@ -385,6 +440,11 @@
           setMsg("Thanks! Your review is up.", "ok");
         })
         .catch(function (err) {
+          if (err && err.message === "wrong_code") {
+            clearCode();
+            codeInput.value = "";
+            if (section.isConnected) codeInput.focus();
+          }
           setMsg(friendlyError(err), "error");
         })
         .then(function () {
@@ -397,6 +457,7 @@
   window.Reviews = {
     enabled: enabled,
     paintCards: paintCards,
+    getStats: getStats,
     mountDetail: mountDetail
   };
 })();
