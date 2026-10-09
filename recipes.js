@@ -183,5 +183,36 @@ window.RECIPES = [
       "Cool in the pan for 15 minutes, then transfer to a wire rack."
     ],
     "notes": "Favorite variation: before baking, sprinkle the top with 1 tablespoon turbinado sugar, a handful of chopped pecans, and a light dusting of cinnamon for a sweet, crunchy crust. Tip: this bread is better the next day. Wrap it tightly and let the flavors settle overnight if you can resist cutting into it."
+  },
+  {
+    "id": "double-batch-sourdough-pancakes",
+    "title": "Double Batch Sourdough Pancakes",
+    "category": "Breakfast",
+    "tags": [
+      "sourdough discard",
+      "pancakes"
+    ],
+    "timeMinutes": null,
+    "servings": null,
+    "image": "",
+    "ingredients": [
+      "480 g sourdough discard (100% hydration)",
+      "480 g milk",
+      "2 large eggs (about 100 g without shells)",
+      "56 g melted butter",
+      "24 g sugar",
+      "240 g all-purpose flour",
+      "10 g baking powder (2 tsp)",
+      "6 g baking soda (1 tsp)",
+      "6 g salt"
+    ],
+    "steps": [
+      "Whisk together the sourdough discard, milk, eggs, sugar, and melted butter.",
+      "Stir in the flour and salt until just combined.",
+      "Add the baking powder and baking soda, mixing gently.",
+      "Let the batter rest for 5 to 10 minutes.",
+      "Cook on a lightly greased skillet over medium heat until bubbles form on top, then flip and cook until golden brown."
+    ],
+    "notes": "Makes roughly 16 to 20 medium pancakes, depending on the size."
   }
 ];
