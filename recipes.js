@@ -214,5 +214,103 @@ window.RECIPES = [
       "Cook on a lightly greased skillet over medium heat until bubbles form on top, then flip and cook until golden brown."
     ],
     "notes": "Makes roughly 16 to 20 medium pancakes, depending on the size."
+  },
+  {
+    "timeMinutes": null,
+    "servings": null,
+    "image": "",
+    "id": "homemade-herbes-de-provence",
+    "title": "Homemade Herbes de Provence",
+    "category": "Spice Blends",
+    "tags": [
+      "herbs",
+      "pantry"
+    ],
+    "ingredients": [
+      "2 tablespoons dried thyme",
+      "2 tablespoons dried rosemary, crushed",
+      "2 tablespoons dried oregano",
+      "1 tablespoon dried marjoram",
+      "1 tablespoon dried savory (if available)",
+      "1 tablespoon dried basil",
+      "1 teaspoon dried tarragon",
+      "1 teaspoon dried lavender buds (optional, for a more traditional floral note in some modern blends)"
+    ],
+    "steps": [
+      "Mix all the herbs together.",
+      "Store in an airtight jar for up to 6 months."
+    ],
+    "notes": "Use it in Herbes de Provence Roasted Potatoes, Herbes de Provence Grilled Chicken, and the Herbes de Provence BBQ Rub."
+  },
+  {
+    "timeMinutes": null,
+    "servings": null,
+    "image": "",
+    "id": "herbes-de-provence-roasted-potatoes",
+    "title": "Herbes de Provence Roasted Potatoes",
+    "category": "Sides",
+    "tags": [
+      "potatoes",
+      "herbes de provence"
+    ],
+    "ingredients": [
+      "2 lbs potatoes",
+      "2 tbsp olive oil",
+      "1 tbsp Herbes de Provence",
+      "Salt and pepper"
+    ],
+    "steps": [
+      "Toss everything together.",
+      "Roast at 425°F for 35 to 45 minutes."
+    ],
+    "notes": ""
+  },
+  {
+    "timeMinutes": null,
+    "servings": null,
+    "image": "",
+    "id": "herbes-de-provence-grilled-chicken",
+    "title": "Herbes de Provence Grilled Chicken",
+    "category": "Mains",
+    "tags": [
+      "chicken",
+      "grilling",
+      "herbes de provence"
+    ],
+    "ingredients": [
+      "Chicken",
+      "Olive oil",
+      "Salt and pepper",
+      "1 to 2 teaspoons Herbes de Provence per pound of meat"
+    ],
+    "steps": [
+      "Coat the chicken with olive oil.",
+      "Season with salt, pepper, and 1 to 2 teaspoons Herbes de Provence per pound of meat.",
+      "Grill or roast as usual."
+    ],
+    "notes": "Herbes de Provence is traditionally used on roasted chicken and other grilled meats."
+  },
+  {
+    "timeMinutes": null,
+    "servings": null,
+    "image": "",
+    "id": "herbes-de-provence-bbq-rub",
+    "title": "Herbes de Provence BBQ Rub",
+    "category": "Spice Blends",
+    "tags": [
+      "bbq",
+      "rub",
+      "smoker"
+    ],
+    "ingredients": [
+      "1 tbsp Herbes de Provence",
+      "1 tsp kosher salt",
+      "½ tsp black pepper",
+      "1 tsp garlic powder"
+    ],
+    "steps": [
+      "Mix everything together."
+    ],
+    "notes": "Excellent on spatchcock chicken cooked on a pellet smoker. The rosemary and thyme complement smoke well without overpowering the meat."
   }
 ];
