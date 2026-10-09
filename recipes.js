@@ -312,5 +312,35 @@ window.RECIPES = [
       "Mix everything together."
     ],
     "notes": "Excellent on spatchcock chicken cooked on a pellet smoker. The rosemary and thyme complement smoke well without overpowering the meat."
+  },
+  {
+    "id": "swedish-pancakes-basic-batter",
+    "title": "Swedish Pancakes (Basic Batter)",
+    "category": "Breakfast",
+    "tags": [
+      "pancakes",
+      "swedish",
+      "thin pancakes"
+    ],
+    "timeMinutes": null,
+    "servings": 4,
+    "image": "",
+    "ingredients": [
+      "2½ dl (about 1 cup) all-purpose flour",
+      "½ tsp salt",
+      "6 dl (about 2½ cups) milk",
+      "3 eggs",
+      "Butter, for frying",
+      "Jam, berries, or fruit, for serving"
+    ],
+    "steps": [
+      "Mix the flour and salt in a bowl.",
+      "Whisk in half of the milk until the batter is smooth.",
+      "Whisk in the rest of the milk and the eggs.",
+      "Let the batter rest for about 10 minutes.",
+      "Fry thin pancakes in a frying pan or pancake pan, using a little butter for each pancake.",
+      "Serve with jam and cream, berries, or fruit."
+    ],
+    "notes": "Makes about 8 to 10 thin pancakes, depending on the size of your pan. Cup measurements are approximate conversions from the Swedish deciliters. Translated from ICA.se, \"Pannkakor – grundsmet\" (originally from Buffé no. 11, 1997)."
   }
 ];
