@@ -146,5 +146,42 @@ window.RECIPES = [
       "Serve warm with your favorite toppings."
     ],
     "notes": "Topping ideas: maple syrup, powdered sugar, fresh berries or sliced bananas, whipped cream, peanut butter or Nutella, toasted nuts. For extra-rich French toast, use brioche bread and substitute half of the milk with heavy cream."
+  },
+  {
+    "id": "sourdough-banana-bread",
+    "title": "Sourdough Banana Bread",
+    "category": "Bread",
+    "tags": [
+      "sourdough discard",
+      "quick bread",
+      "sweet"
+    ],
+    "timeMinutes": null,
+    "servings": null,
+    "image": "",
+    "ingredients": [
+      "1 cup (240 g) sourdough discard (unfed is fine)",
+      "3 very ripe bananas, mashed",
+      "1/2 cup (115 g) melted butter",
+      "3/4 cup (150 g) brown sugar",
+      "2 large eggs",
+      "1 teaspoon vanilla extract",
+      "1 1/2 cups (190 g) all-purpose flour",
+      "1 teaspoon baking soda",
+      "1/2 teaspoon salt",
+      "1 teaspoon cinnamon (optional)",
+      "1/2 cup chopped walnuts or chocolate chips (optional)"
+    ],
+    "steps": [
+      "Heat oven to 350°F (175°C). Grease a 9x5-inch loaf pan or line it with parchment paper.",
+      "In a large bowl, whisk together the mashed bananas, sourdough discard, melted butter, brown sugar, eggs, and vanilla.",
+      "In a separate bowl, combine the flour, baking soda, salt, and cinnamon.",
+      "Gently fold the dry ingredients into the wet ingredients until just combined. Do not overmix.",
+      "Fold in walnuts or chocolate chips if using.",
+      "Pour into the prepared loaf pan.",
+      "Bake for 55 to 65 minutes, or until a toothpick inserted into the center comes out with just a few moist crumbs.",
+      "Cool in the pan for 15 minutes, then transfer to a wire rack."
+    ],
+    "notes": "Favorite variation: before baking, sprinkle the top with 1 tablespoon turbinado sugar, a handful of chopped pecans, and a light dusting of cinnamon for a sweet, crunchy crust. Tip: this bread is better the next day. Wrap it tightly and let the flavors settle overnight if you can resist cutting into it."
   }
 ];
